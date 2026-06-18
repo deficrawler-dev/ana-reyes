@@ -71,7 +71,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      padding: 9rem 5vw 5rem;
+      padding: 10rem 5vw 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -143,8 +143,9 @@
     /* hero image */
     .hero-image-wrap {
       position: relative; z-index: 2;
-      display: flex; justify-content: center; align-items: flex-start;
+      display: flex; justify-content: center; align-items: center;
       flex-direction: column;
+      gap: 0;
     }
     .hero-image-frame {
       position: relative;
@@ -153,8 +154,8 @@
     .hero-image-frame::before {
       content: '';
       position: absolute;
-      top: -24px; right: -24px;
-      width: 100%; height: 100%;
+      top: -16px; right: -16px;
+      width: 100%; height: calc(100% - 80px);
       border: 2px solid var(--gold);
       z-index: 0;
     }
@@ -176,10 +177,11 @@
       position: relative;
       z-index: 3;
       background: var(--gold);
-      padding: .9rem 1.5rem;
+      padding: 1rem 1.5rem;
       color: var(--black);
       width: 100%;
-      margin-top: .5rem;
+      margin-top: 0;
+      text-align: center;
     }
     .hero-signature p {
       font-family: 'Dancing Script', cursive;
@@ -538,7 +540,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      #hero { grid-template-columns: 1fr; padding-top: 7rem; text-align: center; }
+      #hero { grid-template-columns: 1fr; padding-top: 8rem; padding-bottom: 3rem; text-align: center; }
       .hero-image-wrap { order: -1; align-items: center; }
       .hero-image-frame { width: 280px; margin: 0 auto; }
       .hero-sub { margin: 1.2rem auto 0; }
@@ -547,8 +549,7 @@
       #stats { grid-template-columns: repeat(2,1fr); }
       .services-grid { grid-template-columns: 1fr; }
       #why { grid-template-columns: 1fr; gap: 2.5rem; }
-      .process-steps { grid-template-columns: repeat(2,1fr); gap: 2rem; }
-      .process-steps::before { display: none; }
+      /* process section handled by inline grid */
       footer { flex-direction: column; text-align: center; gap: .8rem; }
     }
     @media (max-width: 640px) {
@@ -596,7 +597,9 @@
       .hero-title { font-size: clamp(2.2rem, 9vw, 3.5rem); }
       .hero-image-frame { width: 240px; }
       .hero-signature { left: 0; font-size: .85em; }
-      .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+
+      #process > div[style*="grid-template-columns:repeat(2,1fr)"] { grid-template-columns: 1fr !important; }
+      #process > div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
       .contact-cards { flex-direction: column; align-items: center; }
       .contact-card { width: 100%; max-width: 320px; }
       .btn-primary, .btn-outline { padding: .85rem 1.5rem; font-size: .82rem; }
@@ -621,8 +624,9 @@
     <div class="nav-logo">Ana Reyes</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#process" onclick="closeMenu()">How It Works</a></li>
       <li><a href="#why" onclick="closeMenu()">Why Me</a></li>
-      <li><a href="#process" onclick="closeMenu()">Process</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
       <li><a href="#contact" class="nav-cta" onclick="closeMenu()">Free Consultation</a></li>
     </ul>
     <div class="nav-contact" id="navContact">
@@ -651,15 +655,14 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-text fade-in">
-      <div class="hero-eyebrow">Accident Consultant · New York</div>
+      <div class="hero-eyebrow">Professional Services · Sandy Springs, GA</div>
       <h1 class="hero-title">
-        Your Advocate.<br/>
-        <span>Your Voice.</span>
+        Professional <span>Services You</span> Can Trust.
       </h1>
       <p class="hero-sub">
-        Accidents are stressful. The process doesn't have to be. As your
-        <em>dedicated accident consultant</em>, I guide you every step of the way
-        and fight for your rights — so you can focus on healing.
+        Whether you need roofing, plumbing, accident consultation, or mindset coaching —
+        I'm your <em>dedicated advocate</em>, here to guide you every step of the way
+        so you can focus on what matters most.
       </p>
       <div class="hero-actions">
         <a href="tel:7184066292" class="btn-primary">📞 Call Now — Free Consult</a>
@@ -697,53 +700,13 @@
     </div>
   </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="fade-in">
-      <div class="section-eyebrow">What I Do</div>
-      <h2 class="section-title">My Services</h2>
-      <div class="gold-rule"></div>
-      <p style="color:var(--muted);max-width:520px;font-size:.95rem;line-height:1.7">
-        I handle the complexity so you don't have to. From the first call to final settlement, every detail is managed with precision and care.
-      </p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card fade-in">
-        <div class="service-icon">📋</div>
-        <div>
-          <h3>Case Evaluation</h3>
-          <p>A thorough review of your accident, injuries, and circumstances to build the strongest possible foundation for your claim.</p>
-        </div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">📁</div>
-        <div>
-          <h3>Insurance Claim Assistance</h3>
-          <p>Navigating insurance paperwork and deadlines is my job — I ensure nothing is missed and everything is filed correctly.</p>
-        </div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">🤝</div>
-        <div>
-          <h3>Negotiation with Insurers</h3>
-          <p>Insurance companies have teams of adjusters. I level the playing field and negotiate aggressively on your behalf.</p>
-        </div>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon">💰</div>
-        <div>
-          <h3>Maximize Your Compensation</h3>
-          <p>Most people leave money on the table. I know exactly what you're entitled to — and I fight until you get it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- WHY CHOOSE ME -->
   <section id="why">
     <div class="fade-in">
       <div class="section-eyebrow">Why Choose Me</div>
-      <h2 class="section-title">I'm Here to Help You Get the Compensation You Deserve</h2>
+      <h2 class="section-title">I'm Here to Help You — Whatever You Need</h2>
       <div class="gold-rule"></div>
       <ul class="why-list">
         <li>
@@ -769,13 +732,13 @@
         <blockquote>
           "Let me help you turn your setback into your comeback."
         </blockquote>
-        <cite>— Ana Reyes, Accident Consultant</cite>
+        <cite>— Ana Reyes, Your Advocate &amp; Trusted Partner</cite>
       </div>
       <div style="margin-top:1.5rem;background:var(--dark-card);border:1px solid var(--dark-border);padding:1.8rem 2rem;">
-        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Free Consultation Includes</div>
+        <div style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Every Consultation Includes</div>
         <div style="display:flex;flex-direction:column;gap:.6rem">
-          <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;Review of your accident details</div>
-          <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;Assessment of potential compensation</div>
+          <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;A genuine listen to your situation</div>
+          <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;Honest assessment of your options</div>
           <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;Clear explanation of next steps</div>
           <div style="font-size:.9rem;color:var(--muted)">⟶ &nbsp;Zero obligation, zero pressure</div>
         </div>
@@ -783,42 +746,194 @@
     </div>
   </section>
 
-  <!-- PROCESS -->
-  <section id="process">
-    <div class="fade-in" style="text-align:center;max-width:560px;margin:0 auto">
+  <!-- HOW IT WORKS -->
+  <section id="process" style="background:var(--black);padding:6rem 5vw;">
+    <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 4.5rem;">
       <div class="section-eyebrow">How It Works</div>
-      <h2 class="section-title">From First Call to Final Settlement</h2>
-      <div class="gold-rule" style="margin:1.2rem auto 0"></div>
+      <h2 class="section-title">Your Journey with Ana</h2>
+      <div class="gold-rule" style="margin:1.2rem auto 1.4rem;"></div>
+      <p style="color:var(--muted);font-size:.95rem;line-height:1.7;">No matter which service you need, the process is simple, transparent, and always centered around you.</p>
     </div>
-    <div class="process-steps" style="margin-top:4rem">
-      <div class="process-step fade-in">
-        <div class="step-circle">1</div>
-        <h3>Free Consultation</h3>
-        <p>Call or email me to tell me what happened. No obligation, no cost.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="fade-in" id="how-steps">
+      <!-- Connecting line -->
+      <div style="position:absolute;top:38px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);z-index:0;"></div>
+
+      <!-- Step 1 -->
+      <div style="padding:0 1.5rem;text-align:center;position:relative;z-index:1;">
+        <div style="width:76px;height:76px;border:2px solid var(--gold);border-radius:50%;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.6rem;gap:.1rem;">
+          <span style="font-size:1.4rem;">📞</span>
+          <span style="font-size:.6rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;font-weight:700;">Step 1</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;">Reach Out</h3>
+        <p style="font-size:.84rem;line-height:1.7;color:var(--muted);">Contact Ana by phone, email, or WhatsApp. No forms, no wait times — just a real conversation.</p>
       </div>
-      <div class="process-step fade-in">
-        <div class="step-circle">2</div>
-        <h3>Case Evaluation</h3>
-        <p>I assess your situation, gather documentation, and build your claim.</p>
+
+      <!-- Step 2 -->
+      <div style="padding:0 1.5rem;text-align:center;position:relative;z-index:1;">
+        <div style="width:76px;height:76px;border:2px solid var(--gold);border-radius:50%;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.6rem;gap:.1rem;">
+          <span style="font-size:1.4rem;">💬</span>
+          <span style="font-size:.6rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;font-weight:700;">Step 2</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;">Share Your Needs</h3>
+        <p style="font-size:.84rem;line-height:1.7;color:var(--muted);">Tell Ana what's going on — a roof leak, a plumbing issue, an accident, or a personal goal. Every situation is heard and taken seriously.</p>
       </div>
-      <div class="process-step fade-in">
-        <div class="step-circle">3</div>
-        <h3>Negotiation</h3>
-        <p>I negotiate directly with insurers to secure the maximum settlement.</p>
+
+      <!-- Step 3 -->
+      <div style="padding:0 1.5rem;text-align:center;position:relative;z-index:1;">
+        <div style="width:76px;height:76px;border:2px solid var(--gold);border-radius:50%;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.6rem;gap:.1rem;">
+          <span style="font-size:1.4rem;">🔍</span>
+          <span style="font-size:.6rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;font-weight:700;">Step 3</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;">Problem Assessment</h3>
+        <p style="font-size:.84rem;line-height:1.7;color:var(--muted);">Ana evaluates your situation thoroughly — understanding the scope, urgency, and best path forward before any commitment is made.</p>
       </div>
-      <div class="process-step fade-in">
-        <div class="step-circle">4</div>
-        <h3>You Get Paid</h3>
-        <p>Funds are settled and you receive the compensation you deserve.</p>
+
+      <!-- Step 4 -->
+      <div style="padding:0 1.5rem;text-align:center;position:relative;z-index:1;">
+        <div style="width:76px;height:76px;border:2px solid var(--gold);border-radius:50%;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.6rem;gap:.1rem;">
+          <span style="font-size:1.4rem;">⚡</span>
+          <span style="font-size:.6rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;font-weight:700;">Step 4</span>
+        </div>
+        <h3 style="font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;">Solution Delivered</h3>
+        <p style="font-size:.84rem;line-height:1.7;color:var(--muted);">The right specialist from Ana's trusted network is deployed. You get expert execution, regular updates, and a result you can count on.</p>
       </div>
     </div>
+
+    <!-- Mobile: stack steps vertically -->
+    <style>
+      @media (max-width: 640px) {
+        #how-steps { grid-template-columns: 1fr 1fr !important; gap: 2rem 0 !important; }
+        #how-steps > div[style*="absolute"] { display: none !important; }
+      }
+      @media (max-width: 400px) {
+        #how-steps { grid-template-columns: 1fr !important; }
+      }
+    </style>
+  </section>
+
+  <!-- SERVICES IN DEPTH -->
+  <section id="services" style="background:var(--dark-card);padding:6rem 5vw;">
+    <div class="fade-in" style="text-align:center;max-width:600px;margin:0 auto 4rem">
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">Professional Services, Done Right</h2>
+      <div class="gold-rule" style="margin:1.2rem auto 1.4rem"></div>
+      <p style="color:var(--muted);font-size:.95rem;line-height:1.7">Ana partners with certified specialists across four disciplines — bringing expert service, honest communication, and reliable results to every client.</p>
+    </div>
+
+    <!-- Service Cards Grid -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--dark-border);" class="fade-in">
+
+      <!-- Roofing -->
+      <div style="background:var(--dark);padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:54px;height:54px;border:1px solid var(--gold);background:rgba(201,147,10,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🏠</div>
+          <div>
+            <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Roofing</div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);">Roofing Services</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">Ana works with certified roofing specialists to deliver quality solutions that protect what matters most — your home or business. From leak repairs to full replacements, every job is done with precision and care.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;padding:0;margin:0;">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Roof inspections &amp; assessments</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Leak detection &amp; emergency repairs</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Full roof replacement &amp; installation</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Insurance claim assistance for roof damage</li>
+        </ul>
+        <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27m%20interested%20in%20Roofing%20Services." target="_blank" style="display:inline-block;margin-top:auto;padding:.7rem 1.4rem;background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(201,147,10,0.1)'" onmouseout="this.style.background='transparent'">Get a Free Quote →</a>
+      </div>
+
+      <!-- Plumbing -->
+      <div style="background:var(--dark);padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:54px;height:54px;border:1px solid var(--gold);background:rgba(201,147,10,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🔧</div>
+          <div>
+            <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Plumbing</div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);">Plumbing Services</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">Reliable plumbing solutions for residential and commercial clients. Ana connects you with trusted licensed plumbers who show up on time, diagnose accurately, and fix it right the first time.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;padding:0;margin:0;">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Pipe repairs &amp; replacements</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Drain cleaning &amp; unclogging</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Water heater installation &amp; repair</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Emergency plumbing response</li>
+        </ul>
+        <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27m%20interested%20in%20Plumbing%20Services." target="_blank" style="display:inline-block;margin-top:auto;padding:.7rem 1.4rem;background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(201,147,10,0.1)'" onmouseout="this.style.background='transparent'">Get a Free Quote →</a>
+      </div>
+
+      <!-- Accident Consultation -->
+      <div style="background:var(--dark);padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:54px;height:54px;border:1px solid var(--gold);background:rgba(201,147,10,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🚗</div>
+          <div>
+            <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Legal Advocacy</div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);">Accident Consultation</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">Accidents are stressful — the process doesn't have to be. Ana guides you through every step of the claims process, fights for your rights, and ensures you receive the full compensation you deserve.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;padding:0;margin:0;">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Free case evaluation</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Insurance claim filing &amp; management</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Negotiation with insurance companies</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> No fees unless we win</li>
+        </ul>
+        <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27m%20interested%20in%20Accident%20Consultation." target="_blank" style="display:inline-block;margin-top:auto;padding:.7rem 1.4rem;background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(201,147,10,0.1)'" onmouseout="this.style.background='transparent'">Book Free Consult →</a>
+      </div>
+
+      <!-- Mindset Coaching -->
+      <div style="background:var(--dark);padding:2.5rem;display:flex;flex-direction:column;gap:1.2rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="width:54px;height:54px;border:1px solid var(--gold);background:rgba(201,147,10,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🧠</div>
+          <div>
+            <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Personal Growth</div>
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);">Mindset Coaching</h3>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">Empowering you with the mindset, clarity, and confidence to achieve your goals. Ana's coaching sessions are designed to help you break through mental barriers and turn setbacks into comebacks.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;padding:0;margin:0;">
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> 1-on-1 coaching sessions</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Goal setting &amp; accountability</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Confidence &amp; clarity building</li>
+          <li style="font-size:.85rem;color:var(--muted);display:flex;align-items:flex-start;gap:.6rem;"><span style="color:var(--gold);margin-top:.1rem;">✓</span> Resilience &amp; mindset transformation</li>
+        </ul>
+        <a href="https://wa.me/17184066292?text=Hi%20Ana!%20I%27m%20interested%20in%20Mindset%20Coaching." target="_blank" style="display:inline-block;margin-top:auto;padding:.7rem 1.4rem;background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(201,147,10,0.1)'" onmouseout="this.style.background='transparent'">Book a Session →</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom trust bar -->
+    <div class="fade-in" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--dark-border);margin-top:2px;">
+      <div style="background:var(--dark);padding:1.6rem 2rem;display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:1.4rem;">🛡️</span>
+        <div>
+          <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Reliable</div>
+          <div style="font-size:.88rem;color:var(--muted);">Certified partners you can trust</div>
+        </div>
+      </div>
+      <div style="background:var(--dark);padding:1.6rem 2rem;display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:1.4rem;">🤝</span>
+        <div>
+          <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Honest</div>
+          <div style="font-size:.88rem;color:var(--muted);">Transparent communication always</div>
+        </div>
+      </div>
+      <div style="background:var(--dark);padding:1.6rem 2rem;display:flex;align-items:center;gap:1rem;">
+        <span style="font-size:1.4rem;">⭐</span>
+        <div>
+          <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem">Satisfaction</div>
+          <div style="font-size:.88rem;color:var(--muted);">Your satisfaction is our priority</div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- CONTACT / CTA -->
   <section id="contact">
     <div class="section-eyebrow" style="text-align:center">Get in Touch</div>
-    <h2 class="section-title fade-in">Call Now for a Free Consultation</h2>
-    <p class="contact-sub fade-in">Accidents are stressful. The process doesn't have to be. Reach out today — I'm ready to fight for you.</p>
+    <h2 class="section-title fade-in">Ready to Get Started?</h2>
+    <p class="contact-sub fade-in">Whatever you're facing — a damaged roof, a plumbing emergency, an accident, or a mindset block — Ana is ready to connect you with the right solution. Reach out today.</p>
     <a href="tel:7184066292" class="btn-primary fade-in" style="font-size:1.1rem;padding:1.1rem 3rem">
       📞 &nbsp;718 406 62 92
     </a>
@@ -851,7 +966,7 @@
   <footer>
     <div>
       <div class="footer-logo">Ana Reyes</div>
-      <div class="footer-tagline" style="margin-top:.3rem">Your Advocate. Your Voice.</div>
+      <div class="footer-tagline" style="margin-top:.3rem">Roofing · Plumbing · Accident Consulting · Mindset Coaching</div>
     </div>
     <div style="font-size:.78rem;color:var(--muted);font-style:italic">"Let me help you turn your setback into your comeback."</div>
     <div class="footer-badge">
@@ -904,5 +1019,98 @@
     });
   </script>
 
+
+  <!-- WHATSAPP LIVE CHAT WIDGET -->
+  <div id="wa-widget" style="position:fixed;bottom:24px;right:24px;z-index:9999;font-family:'Inter',sans-serif;">
+
+    <!-- Chat Panel -->
+    <div id="wa-panel" style="display:none;position:absolute;bottom:72px;right:0;width:300px;background:#0E0E0E;border:1px solid #2A2218;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.6);">
+      <!-- Header -->
+      <div style="background:#C9930A;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem;">
+        <div style="width:40px;height:40px;border-radius:50%;background:#111;border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👩</div>
+        <div>
+          <div style="font-weight:700;color:#0A0A0A;font-size:.9rem;">Ana Reyes</div>
+          <div style="font-size:.7rem;color:#1a1108;">● Available Mon–Sun, 24/7</div>
+        </div>
+        <button onclick="closeWA()" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:1.2rem;color:#0A0A0A;line-height:1;">✕</button>
+      </div>
+      <!-- Bubble -->
+      <div style="padding:1rem 1.2rem;">
+        <div style="background:#1D1808;border:1px solid #2A2218;border-radius:8px;padding:.9rem 1rem;font-size:.85rem;color:#F8F4EE;line-height:1.6;margin-bottom:1rem;">
+          Hi! I'm Ana 👋 How can I help you today? Pick a service below to get started:
+        </div>
+        <!-- Service buttons -->
+        <div style="display:flex;flex-direction:column;gap:.5rem;" id="wa-services">
+          <button onclick="sendWA('Roofing Services')" class="wa-svc-btn">🏠 Roofing Services</button>
+          <button onclick="sendWA('Plumbing Services')" class="wa-svc-btn">🔧 Plumbing Services</button>
+          <button onclick="sendWA('Accident Consultation')" class="wa-svc-btn">🚗 Accident Consultation</button>
+          <button onclick="sendWA('Mindset Coaching')" class="wa-svc-btn">🧠 Mindset Coaching</button>
+          <button onclick="sendWA('General Inquiry')" class="wa-svc-btn" style="opacity:.7">💬 General Inquiry</button>
+        </div>
+      </div>
+      <div style="padding:.6rem 1.2rem 1rem;font-size:.65rem;color:#5a4a30;text-align:center;">
+        You'll be redirected to WhatsApp
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <button id="wa-btn" onclick="toggleWA()" title="Chat on WhatsApp"
+      style="width:58px;height:58px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;"
+      onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,.6)'"
+      onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.45)'">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </button>
+    <!-- Notification dot -->
+    <div id="wa-dot" style="position:absolute;top:2px;right:2px;width:14px;height:14px;background:#C9930A;border-radius:50%;border:2px solid #0A0A0A;animation:wa-pulse 2s infinite;"></div>
+  </div>
+
+  <style>
+    .wa-svc-btn {
+      background: #1D1808;
+      border: 1px solid #2A2218;
+      color: #F8F4EE;
+      padding: .6rem .9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: .82rem;
+      text-align: left;
+      transition: background .18s, border-color .18s;
+      font-family: 'Inter', sans-serif;
+    }
+    .wa-svc-btn:hover {
+      background: #2A1F08;
+      border-color: #C9930A;
+      color: #E8B84B;
+    }
+    @keyframes wa-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: .7; }
+    }
+  </style>
+
+  <script>
+    function toggleWA() {
+      const panel = document.getElementById('wa-panel');
+      const dot = document.getElementById('wa-dot');
+      const isOpen = panel.style.display === 'block';
+      panel.style.display = isOpen ? 'none' : 'block';
+      dot.style.display = isOpen ? '' : 'none';
+    }
+    function closeWA() {
+      document.getElementById('wa-panel').style.display = 'none';
+    }
+    function sendWA(service) {
+      const phone = '17184066292';
+      const msg = encodeURIComponent('Hi Ana! I\'m interested in your ' + service + '. Could you please help me?');
+      window.open('https://wa.me/' + phone + '?text=' + msg, '_blank');
+    }
+    // Show dot after 3s to attract attention
+    setTimeout(() => {
+      const dot = document.getElementById('wa-dot');
+      if (dot) dot.style.display = '';
+    }, 3000);
+  </script>
 </body>
 </html>
