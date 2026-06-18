@@ -20,7 +20,7 @@
       --muted:       #A89070;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -605,6 +605,26 @@
       .btn-primary, .btn-outline { padding: .85rem 1.5rem; font-size: .82rem; }
       .service-card { padding: 1.5rem; }
       footer { padding: 1.5rem 5vw; }
+
+      /* Override inline grids that cause overflow */
+      div[style*="grid-template-columns:repeat(2,1fr)"],
+      div[style*="grid-template-columns: repeat(2, 1fr)"],
+      div[style*="grid-template-columns:repeat(2, 1fr)"],
+      div[style*="grid-template-columns: repeat(2,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+      div[style*="grid-template-columns:repeat(3,1fr)"],
+      div[style*="grid-template-columns: repeat(3, 1fr)"],
+      div[style*="grid-template-columns:repeat(3, 1fr)"],
+      div[style*="grid-template-columns: repeat(3,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+      div[style*="grid-template-columns:repeat(4,1fr)"],
+      div[style*="grid-template-columns: repeat(4, 1fr)"],
+      div[style*="grid-template-columns:repeat(4, 1fr)"],
+      div[style*="grid-template-columns: repeat(4,1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
     }
     @media (max-width: 380px) {
       .hero-image-frame { width: 200px; }
