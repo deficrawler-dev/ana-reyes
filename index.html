@@ -457,7 +457,7 @@
     .nav-contact {
       display: none;
     }
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
       .nav-contact {
         display: flex;
         flex-direction: column;
@@ -540,6 +540,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none !important; }
       #hero { grid-template-columns: 1fr; padding-top: 8rem; padding-bottom: 3rem; text-align: center; }
       .hero-image-wrap { order: -1; align-items: center; }
       .hero-image-frame { width: 280px; margin: 0 auto; }
@@ -552,7 +554,7 @@
       /* process section handled by inline grid */
       footer { flex-direction: column; text-align: center; gap: .8rem; }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
       .hamburger { display: flex; }
       .nav-links {
         display: flex !important;
@@ -570,7 +572,7 @@
         transition: transform .35s cubic-bezier(.4,0,.2,1);
         overflow-y: auto;
       }
-      .nav-links.open { transform: translateX(0); }
+      .nav-links.open { display: flex !important; transform: translateX(0); }
       .nav-links li { border-bottom: 1px solid var(--dark-border); }
       .nav-links a {
         display: block;
@@ -590,6 +592,8 @@
         border-radius: 2px;
       }
       .nav-links li:has(.nav-cta) { border: none; }
+    }
+    @media (max-width: 640px) {
       #stats { grid-template-columns: 1fr 1fr; gap: 1.2rem; padding: 2.5rem 5vw; }
       .stat-num { font-size: 2.2rem; }
       section { padding: 4rem 5vw; }
@@ -1035,7 +1039,7 @@
 
     // Close menu on resize to desktop
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 640) closeMenu();
+      if (window.innerWidth > 900) closeMenu();
     });
   </script>
 
