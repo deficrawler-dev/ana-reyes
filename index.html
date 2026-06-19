@@ -69,7 +69,9 @@
     #hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(auto, 580px) minmax(auto, 520px);
+      justify-content: center;
+      gap: 4rem;
       align-items: center;
       padding: 10rem 5vw 5rem;
       position: relative;
